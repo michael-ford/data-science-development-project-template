@@ -3,7 +3,7 @@
 _A logical, reasonably standardized, but flexible project structure for doing and sharing data science work **while developing a software tool**.
 
 
-This is a project template for data science projects that uses [Cookiecutter](https://cookiecutter.readthedocs.io/en/1.7.2/) for easy deployment. It is a direct modification of [Cookiecutter Data Science](https://github.com/drivendata/cookiecutter-data-science) to serve a use case common to research sciences (especially computational biology / bioinformatics) where a data science project is developed *alongside a software development project*.
+A project template for data science projects that uses [Cookiecutter](https://cookiecutter.readthedocs.io/en/1.7.2/) for easy deployment. It is a direct modification of [Cookiecutter Data Science](https://github.com/drivendata/cookiecutter-data-science) to serve a use case common to research sciences (especially computational biology / bioinformatics) where a data science project is developed *alongside a software development project*.
 
 It utilizes many new tools and best practices to data science:
 
@@ -70,10 +70,12 @@ git subrepo clone <REPO-REMOTE-URL> src/<REPO-NAME> -b <DESIRED-BRANCH-NAME>
 ```
 If you are starting off a software development project from scratch, consider using [Pyscaffold](https://pyscaffold.org/en/latest/). You can follow the following instructions to setup and configure the repo. Note if you want to use a remote (e.g. Github repo), set up a bare repo there first.
 
-1. `cd src/`
-2. `putup <PROJECT-NAME>`
-3. `cd ..`
-4. `git subrepo init src/<PROJECT-NAME> -r <REMOTE-PATH>`
+```
+cd src/
+putup <PROJECT-NAME>
+cd ..
+git subrepo init src/<PROJECT-NAME> -r <REMOTE-PATH>
+```
 
 Note if you would to use a branch other than `master`, checkout that branch before the `git subrepo init` and add `-b <BRANCH-NAME>` to the `git subrepo init` command (see [note about git subrepo branches](#develop-your-software-project-within-the-ds-project-using-git-subrepo) below).
 
