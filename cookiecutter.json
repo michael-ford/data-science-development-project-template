@@ -4,5 +4,5 @@
     "author_name": "Your name (or your organization/company/team)",
     "description": "A short description of the project.",
     "open_source_license": ["MIT", "BSD-3-Clause", "No license file"],
-    "independent subrepo name": "[OPTIONAL] the repository name of independent software dev project",
+    "subrepo_name": "[OPTIONAL] the repository name of independent software dev project"
 }
