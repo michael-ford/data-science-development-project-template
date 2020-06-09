@@ -1,6 +1,6 @@
 # Data Science Development Project Template
 
-_A logical, reasonably standardized, but flexible project structure for doing and sharing data science work **while developing a software tool**.
+_A logical, reasonably standardized, but flexible project structure for doing and sharing data science work **while developing a software tool**._
 
 
 A project template for data science projects that uses [Cookiecutter](https://cookiecutter.readthedocs.io/en/1.7.2/) for easy deployment. It is a direct modification of [Cookiecutter Data Science](https://github.com/drivendata/cookiecutter-data-science) to serve a use case common to research sciences (especially computational biology / bioinformatics) where a data science project is developed *alongside a software development project*.
@@ -32,9 +32,9 @@ $ conda install -c conda-forge cookiecutter
 
 #### 1. Setup the repository
 
-
-Run:
-`cookiecutter https://github.com/michael-ford/data-science-development-project-template.git`
+```
+cookiecutter https://github.com/michael-ford/data-science-development-project-template.git
+```
 
 #### 2. Setup Git
 First, [setup a bare repository](https://help.github.com/en/github/importing-your-projects-to-github/adding-an-existing-project-to-github-using-the-command-line) elsewhere (e.g. Github) to serve as your remote. Then run the following:
