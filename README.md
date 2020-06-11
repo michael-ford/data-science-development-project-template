@@ -96,6 +96,7 @@ The directory structure of your new project looks like this:
 ```
 ├── data
 │   ├── external                        <- Data from third party sources.
+|   |   └── SOURCE.tsv                  <- Record of data sources when not using `dvc run`
 │   ├── interim                         <- Intermediate data that has been transformed.
 │   ├── raw                             <- The original, immutable data dump.
 │   └── results                         <- Final results
