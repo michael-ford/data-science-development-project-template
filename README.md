@@ -48,7 +48,7 @@ git remote -v
 
 Conda is used to create a independent environment, isolated from your system intallations (especially python). Included is a basic python 3.7 conda environment containing standard DS tools (including everything mentioned here), and is stored in `environment.yml`. The default environment name is the same as your repo name (this can be changed by editing `environment.yml`)
 
-1. Create environment with `conda create --file environment.yml`. 
+1. Create environment with `conda env create --file environment.yml`. 
 2. Activate the environment with `conda activate <NEW-ENV-NAME>`
 
 #### 3. Setup DVC
@@ -139,14 +139,14 @@ This project uses [Data Version Control (DVC)](https://dvc.org/doc) to keep trac
 
 The best way to aid in reproducability using DVC is with the [`dvc run`](https://dvc.org/doc/command-reference/run) command. Here's an example performing a simple read mapping common to bioinformatics:
 
-`dvc run -f output_file.dvc -o output_file -d reference.fa -d source.fq "bwa mem reference.fa source.fq > output_file"`
+`dvc run -n output_file -o output_file -d reference.fa -d source.fq "bwa mem reference.fa source.fq > output_file"`
 
 This does the following things:
 1. Runs the command `bwa mem reference.fa source.fq > output_file`
 2. Caches the `output_file` and replaces it with a symlink to the cache
-3. Generates the `output_file.dvc` which encodes the **command** as well as the version of the **dependecy files** (reference.fa, source.fq) and the version of the **output_file**
+3. Adds an `output_file` stage to the `dvc.yaml` file,  which encodes the **command**, inputs and ouputs. Also tracks the version (md5 hash) of the **dependecy files** (reference.fa, source.fq) and **output_file** by adding to the `dvc.lock` file.
 
-By adding `output_file.dvc` to your git commit, you not only track *how* `output_file` was created, but also the *versions* of the files that were used to create it (dependencies), and the *expected version* of the resulting `output_file`. And finally, you can recreate `output_file` by simply running `dvc repro output_file.dvc`.
+By adding `dvc.yaml`, `dvc.lock` to your git commit, you not only track *how* `output_file` was created, but also the *versions* of the files that were used to create it (dependencies), and the *expected version* of the resulting `output_file`. And finally, you can recreate `output_file` by simply running `dvc repro output_file`.
 
 Using the dependecies feature creates a DAG of file dependencies, so that when `dvc repo` is run and the needed dependencies are not available, it will iteratively reproduce upstream dependencies to recreate them.
 
