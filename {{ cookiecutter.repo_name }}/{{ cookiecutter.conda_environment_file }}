@@ -1,4 +1,4 @@
-name: {{ cookiecutter.repo_name }}
+name: {{ cookiecutter.conda_environment_name }}
 channels:
   - defaults
   - conda-forge
@@ -7,7 +7,7 @@ dependencies:
   - dvc
   - jupyter
   - jupyterlab
-  - biopython
   - numpy
   - matplotlib
-
+  - papermill
+  - ipykernel
