@@ -186,6 +186,8 @@ Jupyter Lab offers many features that make it an ideal base from which to run ex
 
 The default conda environment includes a package called [nb_conda_kernels](https://github.com/Anaconda-Platform/nb_conda_kernels). This ensures that a Jupyter session run from this environment will automatically detect any other conda environments and add them as jupyter kernels, as long as they have the `ipykernel` package installed
 
+The default environment includes the [`nbdime`](https://nbdime.readthedocs.io) package, which allows git to [play nicely with jupyter notebooks](https://nbdime.readthedocs.io/en/latest/#git-integration-quickstart).
+
 ### Link Jupyter notebooks with DVC using [Papermill](https://papermill.readthedocs.io/en/latest/)
 You can link your notebooks into DVC stages using the papermill tool (provided in the default conda environment). For info on using papermill with jupyter checkout [this blog post](https://medium.com/y-data-stories/automating-jupyter-notebooks-with-papermill-4b8543ece92f).
 
