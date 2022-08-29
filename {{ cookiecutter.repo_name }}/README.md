@@ -3,6 +3,19 @@
 
 {{cookiecutter.description}}
 
+Clone instructions
+------------------
+
+### Automatic
+Run `./setup-new-clone.sh`
+
+### Manual
+1. git clone the repo
+2. Run `conda env create -f {{ cookiecutter.conda_environment_file }}`
+3. `conda activate {{ cookiecutter.conda_environment_file }}`
+4. Install `src` as python package: `python setup.py develop`
+4. Setup DVC
+
 Project Organization
 ------------
 
@@ -12,15 +25,14 @@ Project Organization
 │   ├── raw                             <- The original, immutable data dump.
 │   └── results                         <- Final results
 |
-├── environment.yml                     <- Conda environment definition for reproducing 
+├── environment.yml                     <- Conda environment definition for reproducing  
 |
-├── experiments                         <- Experiments devided by subdirectory
+├── experiments                         <- Experiments devided by subdirectory (see `new-experiment-template/README.md` for instructions on replicating)
 │   └── 03-04-14.sample-experiment      <- Sample demonstrating the structure
 │       ├── data -> ../../data/         <- Softlink to data/ for code cleanliness
 │       ├── notebooks                   <- Jupyter notebooks for experiment
-│       └── reports                     <- Final reports for communication (e.g. html 
-|           |                              version of jupyter nb)
-│           └── figures                 <- Figures for reports
+│       └── results                     <- Final results
+│           └── figures                 <- Figures 
 |
 ├── LICENSE
 ├── README.md                           <- The top-level README for developers using 
