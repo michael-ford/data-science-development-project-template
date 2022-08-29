@@ -1,0 +1,5 @@
+{
+    "experiment_name": "Name of experiment",
+    "experiment_start_data": "Date of start of experiment [YEAR-MONTH-DAY]",
+    "experiment_dir_name": "{{ cookiecutter.experiment_start_data }}.{{ cookiecutter.experiment_name }}" 
+}
