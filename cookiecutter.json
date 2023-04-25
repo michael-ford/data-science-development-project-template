@@ -2,7 +2,7 @@
     "project_name": "project_name",
     "repo_name": "{{ cookiecutter.project_name.lower().replace(' ', '_') }}",
     "conda_environment_name": "{{ cookiecutter.repo_name }}",
-    "conda_environment_file": "{{ cookiecutter.repo_name }}-environment.yml",
+    "conda_environment_file": "{{ cookiecutter.conda_environment_name }}-environment.yml",
     "author_name": "Your name (or your organization/company/team)",
     "description": "A short description of the project.",
     "open_source_license": ["MIT", "BSD-3-Clause", "No license file"],
@@ -11,7 +11,9 @@
     "conda_install": ["Yes - install default conda environment", "No - I want to install manually"],
     "dvc_init": ["Yes - initialize DVC", "No"],
     "dvc_cache_path": "[OPTIONAL] specify the path to desired DVC cache location",
-    "conda_git_hooks": ["Yes - Install git hooks to be installed in .git/hooks to automatically detect conda environment changes",
+    "conda_git_hooks": ["Yes - Install git hooks from git-hooks/ to automatically detect conda environment changes",
                         "No - Do not install git hooks"],
+    "conda_env_tracking_version_numbers": ["Track python package version numbers in env yml",
+                                            "Don't track version numbers"],
     "_copy_without_render": ["*new-experiment-template"]
 }
