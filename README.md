@@ -103,9 +103,9 @@ Note if you would to use a branch other than `master`, checkout that branch befo
 
 #### Install code in src/ as a python package
 
-`python setup.py develop` will setup the `src/` directory as a python package. 
+`pip install -e .` will setup the `src/` directory as a python package. 
 
-Note it is recommended to install your subrepo as a python package [independent from other code in src/](#process-and-generate-data-through-standalone-scripts-stored-in-src). By default your subrepo is excluded from the package install of `src/` (as defined in `setup.py`), so you have to install is deperately by running `python setup.py develop` in the subrepo.
+Note it is recommended to install your subrepo as a python package [independent from other code in src/](#process-and-generate-data-through-standalone-scripts-stored-in-src). By default your subrepo is excluded from the package install of `src/` (as defined in `setup.py`), so you have to install is seperately by running `pip install -e .` in the subrepo.
 
 
 ## The resulting directory structure
