@@ -9,8 +9,6 @@
     "subrepo_name": "[OPTIONAL] the repository name of independent software dev project",
     "init_git": ["Yes - initialize project with git", "No - don't initialize git"],
     "conda_install": ["Yes - install default conda environment", "No - I want to install manually"],
-    "dvc_init": ["Yes - initialize DVC", "No"],
-    "dvc_cache_path": "[OPTIONAL] specify the path to desired DVC cache location",
     "conda_git_hooks": ["Yes - Install git hooks from git-hooks/ to automatically detect conda environment changes",
                         "No - Do not install git hooks"],
     "conda_env_tracking_version_numbers": ["Track python package version numbers in env yml",
