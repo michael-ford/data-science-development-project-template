@@ -16,3 +16,4 @@ dependencies:
   - ipykernel
   - seaborn
   - ipywidgets
+  - ipympl
