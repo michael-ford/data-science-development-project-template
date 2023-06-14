@@ -41,17 +41,6 @@ else:
     print(f"\nSetting git-hooks/* as executable and symlinking to .git/hooks/...")
     os.system('chmod u+x git-hooks/* && cd .git/hooks && ln -s ../../git-hooks/*')
 
-dvc_init = '{{ cookiecutter.dvc_init }}'.split(' -')[0] == 'Yes'
-if dvc_init:
-    print(f"\nInitializing DVC...")
-    os.system('dvc init')
-
-dvc_path = '{{ cookiecutter.dvc_cache_path }}'
-if '[OPTIONAL]' not in dvc_path:
-    if os.path.isdir(dvc_path):
-        os.system(f"mkdir -p {dvc_path} && dvc cache dir {dvc_path}")
-    else:
-        print(f"ERROR: Cannot change DVC cache path: {dvc_path} doesn't exist")
 
 print(f"\nAdding {{ cookiecutter.conda_environment_file }} - `git add {{ cookiecutter.conda_environment_file }}`")
 os.system('git add {{ cookiecutter.conda_environment_file }}')
