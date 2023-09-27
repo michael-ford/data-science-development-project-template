@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+
+echo "==================== post-merge hook ===================="
+
+changed_files="$(git diff-tree -r --name-only --no-commit-id ORIG_HEAD HEAD)"
+
+check_run() {
+    echo "$changed_files" | grep --quiet "$1" && eval "$2"
+}
+
+echo "Have to update the conda environment"
+check_run immunotyper-ill.yml "conda env update -n immunotyper-ill -f immunotyper-ill.yml --prune"

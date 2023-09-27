@@ -1,9 +1,5 @@
 import os
 export_flag = True
-try:
-    from .{{ cookiecutter.conda_environment_name }}_env_export import main as export_conda_env
-except ImportError:
-    export_flag = False
 
 print("""
 
@@ -21,7 +17,9 @@ if conda_install:
     os.system('eval "$(conda shell.bash hook)" && conda activate {{ cookiecutter.conda_environment_name}}')
     # Export version numbers if option was selected
     if not "Don't" in "{{ cookiecutter.conda_env_tracking_version_numbers }}" and export_flag:
-        export_conda_env("{{ cookiecutter.conda_environment_file }}")
+        os.system("python {{ cookiecutter.conda_environment_name }}_env_export.py > {{ cookiecutter.conda_environment_file }}")
+    else:
+        os.system('sed -i "s/OUTPUT_VERSIONS = True/OUTPUT_VERSIONS = False/" {{ cookiecutter.conda_environment_name }}_env_export.py')
 else:
     print("""Not installing default conda environment - after modification install the environment:
 1.  Created your conda environment (modify as needed) - `conda env create -f {{ cookiecutter.conda_environment_file }}`
@@ -39,7 +37,7 @@ if not copy_git_hooks:
     os.system('rm -r git-hooks/')
 else:
     print(f"\nSetting git-hooks/* as executable and symlinking to .git/hooks/...")
-    os.system('chmod u+x git-hooks/* && cd .git/hooks && ln -s ../../git-hooks/*')
+    os.system('chmod u+x git-hooks/* && cd .git/hooks && ln -s ../../git-hooks/*' ./)
 
 
 print(f"\nAdding {{ cookiecutter.conda_environment_file }} - `git add {{ cookiecutter.conda_environment_file }}`")

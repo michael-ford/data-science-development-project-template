@@ -1,0 +1,36 @@
+#!/usr/bin/env bash
+
+check_environment () {
+
+    echo "Making new environment file..."
+    # Export conda environment to yaml file
+    python conda_env_export.py > immunotyper-ill.yml
+
+    # Check if new environment file is different from original 
+    git diff --exit-code --quiet immunotyper-ill.yml
+
+    # If new environment file is different, commit it
+    if [[ $? -eq 0 ]]; then
+        echo "Conda environment not changed."
+    else
+        echo "Conda environment has changed!"
+        git add immunotyper-ill.yml
+        echo 'New environment file has been create and staged, please verify and re-try your commit.'
+        exit 1
+    fi
+}
+
+exec < /dev/tty
+
+echo ""
+echo "==================== pre-commit hook ===================="
+echo ""
+while true; do
+    read -p "Do you wish to check for conda environment changes? " yn
+    case $yn in
+        [Yy]* ) check_environment; exit $?;;
+        [Nn]* ) exit 0;;
+        * ) echo "Please answer yes or no.";;
+    esac
+done
+
