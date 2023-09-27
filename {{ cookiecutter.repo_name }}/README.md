@@ -14,9 +14,9 @@ Run `./setup-new-clone.sh`
 2. Run `conda env create -f {{ cookiecutter.conda_environment_file }}`
 3. `conda activate {{ cookiecutter.conda_environment_file }}`
 4. Install `src` as python package: `python setup.py develop`
-4. Setup DVC
 
 Project Organization
+```
 ------------
 
 ├── data
@@ -44,7 +44,7 @@ Project Organization
     │   └── __init__.py
     └── __init__.py                     <- Makes src a Python module
 
-
+```
 --------
 
 <p><small>Project based on the <a target="_blank" href="http://github.com/michael-ford/data-science-development-project-template">Data Science Development Project Template</a>, a fork of <a target="_blank" href="https://drivendata.github.io/cookiecutter-data-science/">cookiecutter data science project template</a></small></p>

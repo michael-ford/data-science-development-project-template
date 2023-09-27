@@ -7,7 +7,6 @@ A project template for data science projects that uses [Cookiecutter](https://co
 
 It utilizes many new tools and best practices to data science:
 
-- Reproducibility and data version control through [DVC](https://dvc.org/doc)
 - Integration of a software development project using [git-subrepo](https://github.com/ingydotnet/git-subrepo)
 - Experiment development and communication using [Jupyter-lab](https://jupyterlab.readthedocs.io/en/stable/)
 - Environment reproducability and package management using [Conda](https://docs.conda.io/en/latest/) and [git hooks](https://git-scm.com/book/en/v2/Customizing-Git-Git-Hooks)
@@ -73,10 +72,6 @@ git remote add origin <REMOTE-REPO-URL>
 git remote -v
 ```
 
-### Init DVC
-
-    dvc init
-
 ### Setup software development project as a subrepo
 If your DS project is supporting the development of some software development project, I recommend using [git-subrepo](https://github.com/ingydotnet/git-subrepo) to include it's repo in the project by cloning it as follows:
 
@@ -116,7 +111,7 @@ The directory structure of your new project will look something like this:
 ```
 ├── data
 │   ├── external                        <- Data from third party sources.
-|   |   └── SOURCE.tsv                  <- Record of data sources when not using `dvc run`
+|   |   └── SOURCE.tsv                  <- Record of data sources
 │   ├── interim                         <- Intermediate data that has been transformed.
 │   ├── raw                             <- The original, immutable data dump.
 │   └── results                         <- Final results
@@ -155,52 +150,12 @@ from src.data.clean import clean_raw_dataset
 ``` 
 
 
-### Version Control, Backup Data and Reproducible Methods using DVC
-This project uses [Data Version Control (DVC)](https://dvc.org/doc) for the following purposes:
-1. Version control data files that shouldn't / are too big to be managed with Git
-2. Ensure method repoducibility
-3. [Backup data files to a remote](https://dvc.org/doc/command-reference/remote) 
-
-The best way to aid in reproducibility using DVC is with the [`dvc run`](https://dvc.org/doc/command-reference/run) command. Here's an example performing a simple read mapping common to bioinformatics:
-
-```
-dvc run -n mapping_stage_name -o output_file -d reference.fa -d source.fq "bwa mem reference.fa source.fq > output_file"
-```
-
-This does the following things:
-1. Runs the command `bwa mem reference.fa source.fq > output_file`
-2. Caches the `output_file` and replaces it with a symlink to the cache
-3. Adds an `output_file` stage to the `dvc.yaml` file,  which encodes the **command**, inputs and ouputs. Also tracks the version (md5 hash) of the **dependecy files** (reference.fa, source.fq) and **output_file** in the `dvc.lock` file.
-
-By adding `dvc.yaml`, `dvc.lock` to your git commit, you not only track *how* `output_file` was created, but also the *versions* of the files that were used to create it (dependencies), and the *expected version* of the resulting `output_file`. And finally, you can recreate `output_file` by simply running `dvc repro output_file`.
-
-Using the dependecies feature creates a DAG of file dependencies, so that when `dvc repro` is run and the needed dependencies are not available, it will iteratively reproduce upstream dependencies to recreate them.
-
-There are other ways of adding data files to DVC such as `dvc add` and `dvc commit`. I recommend reading through the docs once you run into a use case that is different from the above. 
-
-Additionally, you can [setup a remote specifically for DVC](https://dvc.org/doc/command-reference/remote) (such a AWS S3) and backup your data there using [`dvc push`](https://dvc.org/doc/command-reference/push) and [`dvc pull`](https://dvc.org/doc/command-reference/pull).
-
-
 ### Run experiments in Jupyter Lab
 Jupyter Lab offers many features that make it an ideal base from which to run experiments, from data generation to results analysis. The idea being that someone could open a notebook and press 'Run all', and not only have the entire experiment reproduced, but also understand what is happening. Therefore it is important to keep in mind that the notebook purpose is to act as a *driver* and *communicator* for the experiment - external scripts (in `src/`) should be used to keep code streamlined and minimal, and markdown text should be liberally used to explain the process. For more information of Jupyter use see [this excellent blog post](https://florianwilhelm.info/2018/11/working_efficiently_with_jupyter_lab/).
 
 The default conda environment includes a package called [nb_conda_kernels](https://github.com/Anaconda-Platform/nb_conda_kernels). This ensures that a Jupyter session run from this environment will automatically detect any other conda environments and add them as jupyter kernels, as long as they have the `ipykernel` package installed
 
 The default environment includes the [`nbdime`](https://nbdime.readthedocs.io) package, which allows git to [play nicely with jupyter notebooks](https://nbdime.readthedocs.io/en/latest/#git-integration-quickstart).
-
-### Link Jupyter notebooks with DVC using [Papermill](https://papermill.readthedocs.io/en/latest/)
-You can link your notebooks into DVC stages using the papermill tool (provided in the default conda environment). For info on using papermill with jupyter checkout [this blog post](https://medium.com/y-data-stories/automating-jupyter-notebooks-with-papermill-4b8543ece92f).
-
-First, you need to make sure papermill can find your conda environment kernel by [following these instructions](https://github.com/Anaconda-Platform/nb_conda_kernels#use-with-nbconvert-voila-papermill). Take note of the kernel name by running `jupyter kernelspec list` (should be in the form of `conda-env-<env-name>`).
-
-Essentially you will be running your jupyter notebook using papermill *through `dvc run`*. Here's an example of a dvc stage:
-
-```
-dvc run -n my_stage \
--d dependency.data
--o output.txt
-"papermill --kernel conda-env-<env-name> <input-notebook-path> <output-notebook-path> -p <parameter-name> <parameter-value>"
-```
 
 ### Create new experiment directories with *another* cookiecutter
 
