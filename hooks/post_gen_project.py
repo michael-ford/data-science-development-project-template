@@ -37,7 +37,7 @@ if not copy_git_hooks:
     os.system('rm -r git-hooks/')
 else:
     print(f"\nSetting git-hooks/* as executable and symlinking to .git/hooks/...")
-    os.system('chmod u+x git-hooks/* && cd .git/hooks && ln -s ../../git-hooks/*' ./)
+    os.system('chmod u+x git-hooks/* && cd .git/hooks && ln -s ../../git-hooks/* ./')
 
 
 print(f"\nAdding {{ cookiecutter.conda_environment_file }} - `git add {{ cookiecutter.conda_environment_file }}`")
