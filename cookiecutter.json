@@ -13,5 +13,6 @@
                         "No - Do not install git hooks"],
     "conda_env_tracking_version_numbers": ["Track python package version numbers in env yml",
                                             "Don't track version numbers"],
-    "_copy_without_render": ["*new-experiment-template"]
+    "_copy_without_render": ["*new-experiment-template"],
+    "_extensions": ["local_extensions.fix_readline"]
 }
