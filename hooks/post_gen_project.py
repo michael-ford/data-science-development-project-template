@@ -13,7 +13,7 @@ Configuring desired features...
 conda_install = '{{ cookiecutter.conda_install }}'.split(' -')[0] == 'Yes'
 if conda_install:
     print(f"Installing default conda environment...")
-    os.system("conda env create -f {{ cookiecutter.conda_environment_file }} --experimental-solver libmamba")
+    os.system("conda env create -f {{ cookiecutter.conda_environment_file }}")
     os.system('eval "$(conda shell.bash hook)" && conda activate {{ cookiecutter.conda_environment_name}}')
     # Export version numbers if option was selected
     if not "Don't" in "{{ cookiecutter.conda_env_tracking_version_numbers }}" and export_flag:
